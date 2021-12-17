@@ -1,0 +1,71 @@
+{% extends 'custom_admin/base.html'%}
+
+{% block title %}
+Add | Image
+{% endblock title%}
+
+{%block pagehead%}
+ADD PRODUCT IMAGE
+{%endblock pagehead%}
+
+{% block content%}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- jquery validation -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">IMAGE<small></small></h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form id="quickForm" method="post" enctype="multipart/form-data" >
+              {% csrf_token %}
+              <div class="card-body">
+                <div class="form-group">
+                    
+                       
+                       
+                  {% for x in form %}
+                        
+                  <label class="required">{{x.label}}</label> 
+                  
+                   <div>{{x}}</div>
+                   <hr>
+                  
+                  
+                {%endfor%}
+                
+                
+                
+                   
+                
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <a href="{% url 'custom-admin:productimage' %}"><input type="submit" class="btn btn-primary" value="upload"></a>
+              </div>
+            </form>
+            {%if messages%}
+            {%for message in messages%}
+    
+            <p>{{message}}</p>
+            {%endfor%}
+            {%endif%}
+          </div>
+          <!-- /.card -->
+          </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+{% endblock content %}

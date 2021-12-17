@@ -1,0 +1,71 @@
+{% extends 'custom_admin/base.html'%}
+
+{% block title %}
+user | Address
+{% endblock title%}
+
+{%block pagehead%}
+USER ADDRESS
+{%endblock pagehead%}
+
+{% block content%}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">User Address</h3>
+              
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>username</th>
+                  <th>ADDRESS_1</th>
+                  <th>Zipcode</th>
+                  
+                 
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in res%}
+                <tr>
+
+                  <td>{{x.id}} </td>
+                  <td> {{x.user}}</td>
+                  <td> {{x.address_1}}</td>
+                  <td> {{x.zipcode}}</td>
+                 
+                
+                </tr>
+                {%endfor%}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>id</th>
+                    <th>username</th>
+                    <th>ADDRESS_1</th>
+                    <th>Zipcode</th>
+                    
+                    
+                  
+                 
+                  
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+          
+  </section>
+  
+  
+{% endblock content %}
+

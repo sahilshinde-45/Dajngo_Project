@@ -1,0 +1,72 @@
+{% extends 'custom_admin/base.html'%}
+
+{% block title %}
+product_image
+{% endblock title%}
+
+{%block pagehead%}
+PRODUCT IMAGE
+{%endblock pagehead%}
+
+{% block content%}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Product Image</h3>
+              <button type="button" class="btn btn-success" style="float:right;"><a href="{% url 'custom-admin:addproductimage' %}"><h3 class="card-title" style="color : white">Add Image</h3></a></button>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>image</th>
+                  <th>name</th>
+                  <th>created_date</th>
+                  <th>modify_date</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in res%}
+                <tr>
+
+                  <td>{{x.id}} </td>
+                  <td><img src = " {{x.image.url}} " style="width: 100px; height:100px" > </td>
+                  <td> {{x.image_name}}</td>
+                  
+                  <td>{{x.created_date}}</td>
+                  
+                  <td>{{x.modify_date}}</td>
+                  
+                  <td><a href="{% url 'custom-admin:editproductimage' x.id %}"><i class="fas fa-edit"></i></a><a href="{% url 'custom-admin:deleteimage' x.id %}"><i class="fas fa-trash-alt" style="margin-left:20px"></i></a></td>  
+                </tr>
+                {%endfor%}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>id</th>
+                  <th>image</th>
+                  <th>name</th>
+                  <th>created_date</th>
+                  <th>modify_date</th>
+                  <th>Action</th>
+                  
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+          
+  </section>
+  
+  
+{% endblock content %}
+

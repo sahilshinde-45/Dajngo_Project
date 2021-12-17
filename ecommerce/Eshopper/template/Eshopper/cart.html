@@ -1,0 +1,129 @@
+{% extends 'Eshopper/base.html' %}
+{% block title %} Cart | E-shopper {% endblock title%}
+{% block content %}
+	<section id="cart_items">
+		<div class="container ">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info data-product cartdata">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						
+						{%if items %}
+						{% for item in items %}
+						
+						<tr>
+							<td class="cart_product">
+								<a href=""><img src="{{ item.product_id.Pro_Image.url}}" style="width: 100px; height:100px" alt=""></a>
+							</td>
+							<td class="cart_description">
+								<h4>{{item.product_id}}</h4>
+								<p>Web ID: 1089772</p>
+							</td>
+							<td class="cart_price">
+								<p>Rs{{item.product_id.checkOffer}}</p>
+							</td>
+							<input type = "hidden" class="pro_id" value="{{ item.product_id }}">
+							
+							{% if item.product_id.quantity > item.quantity %}
+							<td class="cart_quantity">
+								 	
+									<input class="cart_quantity_input quantity-update" type="number"  value="{{item.quantity}}" autocomplete="off"  style= "width:50px;padding-left: -5px; padding-right:-5px" min="1" max="100"> 
+									
+								
+							</td>
+							{%else%}
+							<td> <h4>Out Of Stock</h4> </td>
+							{%endif%}
+							<td class="cart_total">
+								<p class="cart_total_price">{{item.sub_total}}</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete " href="{% url 'deletecartitem' id=item.id %}"><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						
+						{%endfor%}
+						{%else%}
+						   <h4>CART IS EMPTY</h4>
+						   
+						{%endif%}
+
+						
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+	<section id="do_action">
+		<div class="container">
+			<div class="heading">
+				<h3>What would you like to do next?</h3>
+				<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="chose_area rounded border-success">
+
+						
+							<li class="single_field zip-field" style="list-style: none; text-align:center"> 
+								{% if coupon_code_message %}
+								 <div class="alert alert-info" style="width:50%; margin-left: 140px">
+										{{coupon_code_message}}
+								 </div>
+								 {%endif%}
+							<form action="" method="get">
+
+								<label>Coupon Code:</label><br>
+								<input type="text" name="CouponCode" class="coupon">
+							<div class="form-group">
+								<input type="submit" value="Apply" class="btn btn-primary">
+							</div>
+							</form>
+							</li>
+						
+						
+						
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="total_area">
+						<ul>
+							<li>Cart Sub Total <span>{{carttotal}}</span></li>
+							{%if couponCode%}
+							<li>Coupon  <span>-{{couponCode.percent_off}}%</span></li>
+							{%else%}
+							<li>Coupon  <span>---</span></li>
+							{%endif%}
+							{%if carttotal >= 500 %}
+							<li>Shipping Cost <span>{{order.shipping_charges}}</span></li>
+							{%else%}
+							<li>Shipping Cost <span>0</span></li>
+							{%endif%}
+							<li>Total <span>{{order.set_grand_total}}</span></li>
+						</ul>
+							<a class="btn btn-default update" href="">Update</a>
+							<a class="btn btn-default check_out" href="{% url 'checkout' %}">Check Out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!--/#do_action-->
+
+{% endblock content %}

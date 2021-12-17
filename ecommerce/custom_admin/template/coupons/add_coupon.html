@@ -1,0 +1,13 @@
+{% extends 'custom_admin/base.html'%}
+
+{% block title %}
+Add|Coupon
+{% endblock title%}
+
+{%block pagehead%}
+ADD_COUPON
+{%endblock pagehead%}
+
+{% block content%}
+{% include 'coupons/add_form.html' with p="ADD COUPON" %}
+{% endblock content %}

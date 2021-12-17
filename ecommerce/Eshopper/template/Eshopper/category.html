@@ -1,0 +1,67 @@
+{%extends 'Eshopper/base.html' %}
+
+
+{%block title%} Eshopper | Category {%endblock title%}
+
+{%block content%}
+
+
+
+<div class="container">
+
+<div class="col-sm-9 padding-right">
+					
+<div class="category_items">
+        
+    <h2 class="title text-center">Category Items</h2>
+    {%if fetch_cat %}
+    {%for x in fetch_cat %}
+    
+
+
+    <div class="col-sm-4">
+        <div class="product-image-wrapper">
+            <div class="single-products">
+                 
+                    <div class="productinfo text-center">
+                        
+                        <img src="{{ x.product_id.Pro_Image.url }}" style="width: 250px; height:250px" alt="" />
+                        <h2><small>RS:-</small>{{x.product_id.checkOffer}}</h2>
+                        <p>{{x.product_id.name}}</p>
+                        <a href="#" class="btn btn-default add-to-cart update-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                    </div>
+               
+                
+                    <div class="product-overlay">
+                        <div class="overlay-content">
+                            <h2><small style="color: cornsilk;">RS:-</small>{{x.product_id.checkOffer}}</h2>
+                            <p>{{x.name}}</p>
+                            <button data-product = {{x.product_id.id}} data-action = "add" class="btn btn-default add-to-cart update-cart"><i class="fa fa-shopping-cart"></i>Add to cart
+                        </div>
+                    </div>
+                 
+            </div>
+            <div class="choose">
+                <ul class="nav nav-pills nav-justified">
+                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                    <li><a href="{% url 'product:details-view' x.product_id.id %}"><i class="fa fa-eye" aria-hidden="true"></i>Detail View</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+    {%else%}
+     
+      <h3>This Category has no product will be adding soon...</h3>
+
+        <br>
+   
+    {%endif%}
+</div>
+</div>
+
+</div>
+    
+ 
+
+{%endblock content%}

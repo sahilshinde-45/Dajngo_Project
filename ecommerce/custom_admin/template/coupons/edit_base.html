@@ -1,0 +1,54 @@
+
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- jquery validation -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">{{p}}</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form id="quickForm" method="post">
+              {%csrf_token%}
+              <div class="card-body">
+                <div class="form-group">
+                    <table>
+                        
+                      {% for x in form %}
+                        
+                      <label class="required">{{x.label}}</label> 
+                      
+                       <div>{{x}}</div>
+                       <hr>
+                      
+                      
+                    {%endfor%}                     
+                </form>
+                </table>
+                  
+                
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <a href="{% url 'custom-admin:listcoupon' %}"><button type="submit" class="btn btn-primary">Save</button></a>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+          </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+

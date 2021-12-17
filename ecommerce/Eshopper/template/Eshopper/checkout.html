@@ -1,0 +1,211 @@
+{% extends 'Eshopper/base.html' %}
+{%block title %} Checkout | E-shopper {%endblock title%}
+
+{% block content%}
+
+<style>
+
+	div.payment-options{
+		text-align: justify;  /* For Edge */
+		text-align-last: right;
+	  }
+</style>
+
+	<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Check out</li>
+				</ol>
+			</div><!--/breadcrums-->
+
+			
+
+			<div class="register-req">
+				Please fill the form correctly so that Item can be delivered correctly. 
+				<span style="margin-left:475px"> To change address --> <a href="{% url 'account' %}">Account </a> </span>
+			</div><!--/register-req-->
+
+			<div class="shopper-informations">
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="shopper-info">
+							<p>Shopper Information</p>
+							<form>
+								<input type="text" placeholder="Full Name" value ="{{user_info.fullname}}">
+								<input type="text" placeholder="User Name" value="{{user_info.username}}">
+								<input type="Email" placeholder="Email" value="{{user_info.email}}">
+								<input type="text" placeholder="Phone Number" value="{{user_info.phone_number}}">
+							</form>
+						
+						</div>
+					</div>
+					<div class="col-sm-5 clearfix">
+						<div class="bill-to">
+							<p>Shipping Address</p>
+							<div class="form-one">
+							<form>
+								{%csrf_token%}
+								
+									<input type="text" placeholder="User Name" value="{{user_info.username}}">
+									<input type="text" placeholder="Email*" value="{{user_info.email}}">
+									<input type="text" placeholder="First Name*" value="{{user_info.first_name}}">
+									<input type="text" placeholder="Last Name*" value="{{user_info.last_name}}">
+									<input type="text" placeholder="Address 1*" name="address1" value="{{order.shipping_address_1}}">
+									<input type="text" placeholder="Address 2" name="address2" value="{{order.shipping_address_2}}">	
+								</form>
+							</div>
+							<div class="form-two">
+								<form>
+							
+									<input type="text" placeholder="City*" name="city" value="{{order.shipping_city}}">
+									<input type="text" placeholder="State*" name="state" value="{{order.shipping_state}}">
+									<input type="text" placeholder="Country*" name="country" value="{{order.shipping_country}}">
+									<input type="text" placeholder="Zip / Postal Code *" name="zipcode"value="{{order.shipping_zipcode}}" >
+									<input type="text" placeholder="Mobile Phone*" value="{{user_info.phone_number}}">
+									
+								
+								</form>
+							</div>
+							
+							
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="order-message">
+							<p>Billing Address</p>
+							<div class="form-one">
+							<form>
+								{%csrf_token%}
+								
+									<input type="text" placeholder="User Name" value="{{user_info.username}}">
+									<input type="text" placeholder="Email*" value="{{user_info.email}}">
+									<input type="text" placeholder="First Name*" value="{{user_info.first_name}}">
+									<input type="text" placeholder="Last Name*" value="{{user_info.last_name}}">
+									<input type="text" placeholder="Address 1*" name="address1" value="{{order.billing_address_1}}">
+									<input type="text" placeholder="Address 2" name="address2" value="{{order.billing_address_2}}">	
+								</form>
+							</div>
+							<div class="form-two">
+								<form>
+							
+									<input type="text" placeholder="City*" name="city" value="{{order.billing_city}}">
+									<input type="text" placeholder="State*" name="state" value="{{order.billing_state}}">
+									<input type="text" placeholder="Country*" name="country" value="{{order.billing_country}}">
+									<input type="text" placeholder="Zip / Postal Code *" name="zipcode"value="{{order.billing_zipcode}}" >
+									<input type="text" placeholder="Mobile Phone*" value="{{user_info.phone_number}}">
+									
+								
+								</form>
+							</div>
+							
+							
+						</div>
+						
+					</div>					
+				</div>
+			</div>
+			<div class="review-payment">
+				<h2>Review & Payment</h2>
+			</div>
+
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in items %}
+						<tr>
+							<td class="cart_product">
+								<a href=""><img src="{{item.product_id.Pro_Image.url}}" style="width: 100px; height:100px" alt=""></a>
+							</td>
+							<td class="cart_description">
+								<h4><a href="">{{item.product_id.name}}</a></h4>
+								<p>Web ID: 1089772</p>
+							</td>
+							<td class="cart_price">
+								<p>Rs{{item.product_id.checkOffer}}</p>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									
+									<input class="cart_quantity_input" type="text" name="quantity" value="{{item.quantity}}" autocomplete="off" size="2">
+									
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">{{item.sub_total}}</p>
+							</td>
+							<td class="cart_delete">
+								
+							</td>
+						</tr>
+						{%endfor%}
+
+					
+						<tr>
+							{%if items%}
+							<td colspan="4">&nbsp;</td>
+							<td colspan="2">
+								<table class="table table-condensed total-result">
+									<tr>
+										<td>Cart Sub Total</td>
+										<td>{{carttotal}}</td>
+									</tr>
+									<tr>
+										<td>Coupon</td>
+										{%if order.coupon_id%}
+										<td>-{{order.coupon_id.percent_off}}%</td>
+										{%else%}
+										<td>----</td>
+										{%endif%}
+
+									</tr>
+									<tr class="shipping-cost">
+										<td>Shipping Cost</td>
+										{%if carttotal >= 500 %}
+										<td> +{{order.shipping_charges}}</td>
+										{%else%}
+										<td>0</td>
+										{%endif%}									
+									</tr>
+									<tr>
+										<td>Total</td>
+										<td><span class="grand_total">{{order.set_grand_total}}</span></td>
+									</tr>
+									{%else%}
+									   NO CART ITEMS
+									{%endif%}
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="payment-options" >
+				{%if order.billing_address_2 or order.shipping_address_1 and user_info.email%}
+				<a href="{% url 'payment' %}" class="btn btn-secondary">Procced to Payment</a>		
+				{%else%}
+				<p><b>Fill the address first:-</b></p>
+				<a href="/account/" class="btn btn-secondary">Account</a>	
+				
+				{%endif%}
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+	
+{%endblock content %}
+	
+
+
+   

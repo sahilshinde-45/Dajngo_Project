@@ -1,0 +1,79 @@
+{% extends 'custom_admin/base.html'%}
+
+{% block title %}
+attribute value
+{% endblock title%}
+
+{%block pagehead%}
+ATTRIBUTE VALUE
+{%endblock pagehead%}
+
+{% block content%}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Attribute Value</h3>
+              <button type="button" class="btn btn-success" style="float:right;"><a href="{% url 'custom-admin:addproduct-attribute-value' %}"><h3 class="card-title" style="color : white">Add Attribute Value</h3></a></button>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>product_attribute_id</th>
+                  <th>attribute_value</th>
+                 <th>created_by</th>
+                  <th>created_date</th>
+                  
+                  <th>modify_by</th>
+                  <th>modify_date</th>
+                  <th>Action</th>
+                  
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in res%}
+                <tr>
+
+                  <td>{{x.id}} </td>
+                  <td> {{x.product_attribute_id}}</td>
+                  <td> {{x.attribute_value}}</td>
+                  <td>{{request.user}}</td>
+                  <td>{{x.created_date}}</td>
+                  <td>{{request.user}}</td>
+                  <td>{{x.modify_date}}</td>
+                 
+                  <td><a href="{% url 'custom-admin:editproduct-attribute-value' x.id %}"><i class="fas fa-edit"></i></a><a href="{% url 'custom-admin:deleteproduct-attribute-value' x.id %}"><i class="fas fa-trash-alt" style="margin-left:20px"></i></a></td>  
+                </tr>
+                {%endfor%}
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>id</th>
+                  <th>product_attribute_id</th>
+                  <th>attribute_value</th>
+                 <th>created_by</th>
+                  <th>created_date</th>
+                  
+                  <th>modify_by</th>
+                  <th>modify_date</th>
+                  <th>Action</th>
+                  
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+          
+  </section>
+  
+  
+{% endblock content %}
+

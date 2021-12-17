@@ -1,0 +1,65 @@
+{%extends 'Eshopper/base.html' %}
+{%block title %} My Order {%endblock title%}
+
+{%block content%}
+
+<center>
+<a href="/cart/trackorder/" class="btn btn-link">Track Order</a> 
+</center>
+<div class = 'container'>
+    <div class="col-sm">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Order History </h3>
+                
+            </div>
+            
+            <div class="panel-body no-padding">
+            {%if y %}
+                
+                <table class="table table-striped no-margin">
+                
+                <tr>
+                    <thead>
+                        <td><b>Product Name</b></td>
+                        <td><b>Image</b></td>
+                        <td><b>Quantity</b></td>
+                    </thead>
+            </tr>
+            
+            
+                
+                {%for order in order_history %}
+                    
+                {%if forloop.counter < y %}
+                    {%for x in order.orderitem_set.all%}
+                        
+                    
+                <tbody>
+                    
+                    <tr>
+                        <td><a href="#"></a>{{x.product_id}}</td>
+                        
+                    
+                        <td><img src="{{x.product_id.Pro_Image.url}}" alt="" width="80px" height="80px"> </td>
+                        <td>{{x.quantity}}</td>
+
+                    </tr>
+                </tbody>
+                        
+                {%endfor%}
+                {%endif%}
+                {%endfor%}
+                
+                
+            {%else%}
+                MAKE YOUR FIRST ORDER NOW --> <a href="/">Product</a>
+                {%endif%}
+                
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{%endblock content%}

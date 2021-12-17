@@ -1,0 +1,59 @@
+{% extends 'custom_admin/base.html'%}
+
+{% block title %}
+Add | category
+{% endblock title%}
+
+{%block pagehead%}
+ADD CATEGORY
+{%endblock pagehead%}
+
+{% block content%}
+
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- jquery validation -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Add Category</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form id="quickForm" method="post">
+              {% csrf_token %}
+              <div class="card-body">
+                <div class="form-group">
+                    
+                    {%for x in form %}    
+                    <label class="required">{{x.label}}</label> 
+                        
+                         <div>{{x}}</div>
+                         <hr>
+                      {%endfor%}
+                
+                    
+               
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+          </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+{% endblock content %}

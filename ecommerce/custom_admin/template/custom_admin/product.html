@@ -1,0 +1,94 @@
+{% extends 'custom_admin/base.html'%}
+
+{% block title %}
+product
+{% endblock title%}
+
+{%block pagehead%}
+PRODUCT
+{%endblock pagehead%}
+
+{% block content%}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Product</h3>
+              <button type="button" class="btn btn-success" style="float:right;"><a href="{% url 'custom-admin:addproduct' %}"><h3 class="card-title" style="color : white">Add Product</h3></a></button>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>name</th>
+                  <th>price</th>
+                 
+                  <th>created_date</th>
+                  
+                  
+                  <th>modify_date</th>
+                  <th>is_feature</th>
+                  <th>quantity</th>
+                  
+                 
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in res%}
+                <tr>
+
+                  <td>{{x.id}} </td>
+                  <td> {{x.name}}</td>
+               {%if x.checkOffer%}
+                  <td><del>{{x.price}}</del> <br>{{x.checkOffer}}</td>
+                  
+                {%else%}
+                   <td> {{x.price}}</td>
+                {%endif%}
+                  
+                  <td>{{x.created_date}}</td>
+                  
+                  <td>{{x.modify_date}}</td>
+                  <td>{{x.is_feature}}</td>
+                  <td>{{x.quantity}}</td>
+                  <td><a href="{% url 'custom-admin:editproduct' x.id %}"><i class="fas fa-edit"></i></a><a href="{% url 'custom-admin:deleteproduct' x.id %}"><i class="fas fa-trash-alt" style="margin-left:20px"></i></a></td>  
+                </tr>
+                {%endfor%}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>id</th>
+                  <th>name</th>
+                  <th>price</th>
+                  
+                  <th>created_date</th>
+                  
+                  
+                  <th>modify_date</th>
+                  <th>is_feature</th>
+                  <th>quantity</th>
+                  
+                 
+                  <th>Action</th>
+                  
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+         </div>
+         </div>
+         </div>
+         </section>
+  
+  
+{% endblock content %}
+

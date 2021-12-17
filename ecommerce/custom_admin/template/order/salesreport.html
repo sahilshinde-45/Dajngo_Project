@@ -1,0 +1,45 @@
+{%extends 'custom_admin/base.html'%}
+
+{%block title%}Sales Report {%endblock title%}
+
+{%block pagehead%}Sales Report{%endblock pagehead%}
+
+{%block content %}
+
+<div class="card">
+    
+        <div class="card-header">
+             <h3 class="card-title">REPORT</h3>
+             
+                
+        </div>
+    
+    <!-- /.card-header -->
+    <div class="card-body">
+      <div class="input-group mb-3">
+          
+        <form action="" method="post">
+            {%csrf_token%}
+            from : <input type="date" name="from_date" id="id_from_date" class="form-control"> 
+            <br> <br>
+            To   : <input type="date" name="to_date" id="id_to_date" class="form-control">
+            <br> <br>
+          <input type="button" value="search" id="search-btn">
+          <br>
+          {%if messages%}
+          {%for message in messages%}
+             <p style="color: red;"> {{message}}</p>
+              
+          {%endfor%}
+          {%endif%}
+          </form>
+        </div>
+      <table id="example2" class="table table-bordered table-striped">
+        
+      </table>
+    </div>
+<!-- /.row -->
+</div>
+
+
+{%endblock content %}

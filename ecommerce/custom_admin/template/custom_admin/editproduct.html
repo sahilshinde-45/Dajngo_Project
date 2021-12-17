@@ -1,0 +1,179 @@
+{% extends 'custom_admin/base.html'%}
+
+{% block title %}
+Edit | Product
+{% endblock title%}
+
+{%block pagehead%}
+EDIT PRODUCT
+{%endblock pagehead%}
+
+{% block content%}
+
+
+
+
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- jquery validation -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Product</h3>
+            
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form id="quickForm" method="post" enctype="multipart/form-data">
+              <div class="card-body">
+                <div class="form-group">
+                  {% csrf_token %}
+          <input type="hidden" name="Product_id" id="id_product" value="{{product.id}}">
+        <div class="card">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="product-tab" data-toggle="tab" href="#product" role="tab" aria-controls="general" aria-selected="true">Product</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="category-tab" data-toggle="tab" href="#category" role="tab" aria-controls="sub_category" aria-selected="false">Category</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="attribute-tab" data-toggle="tab" href="#attribute_value" role="tab" aria-controls="attribute" aria-selected="false">Attribute</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="image-tab" data-toggle="tab" href="#image" role="tab" aria-controls="image" aria-selected="false">Image</a>
+            </li>
+          </ul>
+
+
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="product" role="tabpanel" aria-labelledby="product-tab">
+              <div class="form-group mx-4 mt-4 mb-4">
+                {{form.media}}
+                        {% for x in form %}
+                        
+                        <label class="required">{{x.label}}</label> 
+                        
+                         <div>{{x}}</div>
+                         <hr>
+                        
+                        
+                      {%endfor%}
+                  
+               </div>
+            </div>
+
+            <div class="tab-pane fade" id="category" role="tabpanel" aria-labelledby="category-tab">
+              <div class="form-group mx-4 mt-4 mb-4">
+                {{ Category_Formset.management_form}}
+                <div id="form_set_category_value" >
+                    {% for form in  Category_Formset %}
+                      {{form.non_field_errors}}
+                      {{form.errors}}
+                      {{form.as_table}}
+                    <button type ="button" style="float: right; margin-top:-30px" name="Category" id ="del_btn_formset_cat" class = "btn btn-danger"  value="{{form.instance.id}}"><i class="fas fa-trash"></i></button>
+                    <hr>
+                    {%endfor%}
+                </div>
+                <input type="button" class = "btn btn-primary" value="Add More" id="add_more_category_value">
+                <div id="empty_form_category" style="display: none;">
+                  <table class="no_error">
+                    {{Category_Formset.empty_form}}
+                  </table>
+                </div>  
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="attribute_value" role="tabpanel" aria-labelledby="attribute-tab">
+              <div class="form-group mx-4 mt-4 mb-4">
+                {{attribute_Formset.management_form}}
+                <div id="form_set_attribute_assoc_value">
+                    {% for form in attribute_Formset %}
+                      {{form.non_field_errors}}
+                      {{form.errors}}
+                      {{form.as_table}}
+                    <button type ="button" style = "float: right;" name="Attribute" id ="del_btn_formset" class = "btn btn-danger" value="{{form.instance.id}}"><i class="fas fa-trash"></i></button>
+                    <hr>
+                    {%endfor%}
+                </div>
+                <input type="button" class = "btn btn-primary" value="Add More" id="add_more_attribute_assoc">
+                <div id="empty_form_attribute" style="display: none;">
+                  <table class="no_error">
+                    {{attribute_Formset.empty_form}}
+                  </table>
+                </div>  
+            
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="image" role="tabpanel" aria-labelledby="image-tab">
+              <div class="form-group mx-4 mt-4 mb-4">
+                {{Image_formset.management_form}}
+                <div id="form_set_image_value">
+                  {% for form in Image_formset %}
+                  <table>
+                      {{form.non_field_errors}}
+                      {{form.errors}}
+                      {{form.as_table}}
+                    <button type ="button" style="float: right;" name="Image" id ="del_btn_formset" class = "btn btn-danger" value="{{form.instance.id}}"><i class="fas fa-trash"></i></button>
+                  </table>
+                    <hr>
+                    {%endfor%}
+
+                </div>
+                <input type="button" class = "btn btn-primary" value="Add More" id="add_more_image_value">
+                <div id="empty_form_image" style="display: none;">
+                  <table class="no_error">
+                    {{Image_formset.empty_form}}
+                  </table>
+                </div> 
+
+                    
+                    
+                   
+                
+            </div>
+            </div>
+
+
+
+                    
+                      
+              
+    
+
+
+
+                    
+           </div>
+           </div>
+           
+            
+           </div>       
+                
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+          </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,148 @@
+{%extends 'custom_admin/base.html' %}
+
+{%block title%} Order View {%endblock title%}
+{%block pagehead%}Order Detail{%endblock pagehead%}
+{% block content%}
+
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- jquery validation -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Order Details <small></small></h3>
+            </div>
+    <div class="text-center">
+        <br>
+        <h1 class="text-center my_title">Order Details</h1>
+        <br>
+        <table class="table table-bordered">
+            <tr>
+                <td class="text-left" colspan="2">
+                    <b>Username: </b>{{ order_detail.user }}<br>
+                    <b>Full Name: </b>{{ order_detail.user.fullname }}<br>
+
+                    <b>Order Id : </b>{{ order_detail.id }}<br>
+                    <b>Date: </b>{{ order_detail.created_date}}<br>
+                    <b>Product Price: </b>Rs:- {{ order_detail.grand_total }}/-<br>
+                    <b>Order Status: </b>{{order_detail.status}}<br>
+                    <b>Product Name: </b> <br>
+                    {%if order_detail.orderitem_set%}
+                    {%for product in order_detail.orderitem_set.all %}
+
+                    {{product.product_id}} <br>
+                    {%endfor%}
+                    {%endif%}
+                </td>
+                <td class="text-left" colspan="2">
+                    <b>Billing Address</b><br>
+                    {{ order_detail.user }}<br>
+                    {{ order_detail.billing_address_1 }}<br>
+                    {{ order_detail.billing_city }}, {{ order_detail.billing_state }}<br>
+                    {{ order_detail.billing_zipcode }}<br>
+                    {{ order_detail.billing_country  }}<br>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Product Description</b></td>
+                <td><b>Qty</b></td>
+                <td><b>Unit Price</b></td>
+                <td><b>Sub-Total</b></td>
+            </tr>
+            {%if order_detail.orderitem_set%}
+            {%for product in order_detail.orderitem_set.all %}
+                <tr>
+                    <td>{{ product.product_id }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>Rs:- {{ product.product_id.price }}</td>  <!--unit total-->
+                    <td>Rs:- {{product.sub_total }}</td>  <!-- multiply by quantity-->
+                </tr>
+                {%endfor%}
+                {%endif%}
+            
+            
+               <tr>
+                    <td class="text-right" colspan="3"><b>Coupon Used</b></td>
+                    <td>{{ order_detail.coupon_id }}</td>
+                </tr>
+                <tr>
+                    <td class="text-right" colspan="3"><b>Percent Off :- {{ coupon.percent_off }}%</b></td>
+                    <td> - {{order_detail.coupon_id.percent_off}}</td>
+                </tr>
+
+
+                <tr>
+                    <td class="text-right" colspan="3"><b>shipping Charges</b></td>
+                    <td>Rs:- {{ order_detail.shipping_charges }}</td>
+                </tr>
+
+            <tr>
+                <td class="text-right" colspan="3"><b>Total</b></td>
+                <td>Rs:-{{ total }}</td>
+            </tr>
+            <tr>
+                {%if  order_detail.transaction_id %}
+                <td class="text-right" colspan="3"><b>Total Paid</b></td>
+                <td>Rs:-{{ total }}</td>
+                {%else%}
+                <td class="text-right" colspan="3"><b>Total Paid</b></td>
+                <td>Rs:- --</td>
+                {%endif%}
+            </tr>
+            <tr>
+                <td class="text-left" colspan="2">
+                    <b>Shipping Address: </b><br>
+                    {{ order_detail.user }}<br>
+                    {{ order_detail.shipping_address_1 }}<br>
+                    {{ order_detail.shipping_city }}, {{ order_detail.shipping_state }}<br>
+                    {{ order_detail.shipping_zipcode }}<br>
+                    {{ order_detail.shipping_contry }}<br>
+                </td>
+                <td class="text-left" colspan="2">
+                    <b>Payment Details: </b><br>
+                    {%if  order_detail.transaction_id %}
+                    The order #{{ order_detail.transaction_id }} has been paid succesfully via Paypal.
+                    {%else%}
+                    The order has been paid succesfully via COD Order id is <b>{{order_detail.id}}</b> pay <b>$ {{order_detail.set_grand_total}}</b> at the time of Delivery.
+                    {%endif%}
+
+                </td>
+            </tr>
+        </table>
+        <button class="btn btn-secondary" onclick="window.print();"><i class="fas fa-print"></i>Print Order</button> <!-- Adding onclick="window.print()" so if the person clicks on the button the person can see the print dialog box to print the orderS -->
+        <br>
+     
+    </div>
+    <div class="container">
+        <h4> STATUS</h4>
+        
+        <input type="hidden" name="" id="id_orderview" value="{{order_detail.id}}">
+        <select class="form-select" aria-label="Default select example" id="inputGroupSelect" name="select-option">
+          
+            <option selected>Open this select menu</option>
+            <option value="Pending">Pending</option>
+            <option value="Out for Delivery">Out for Delivery</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Shipping">Shipping</option>
+        </select>
+        <input type="submit" class="input-group-text" for="inputGroupSelect" id="get-status" name="submit-status" value="set"></label>
+    
+         
+
+    </div>
+    </div>
+</div>
+</div>
+    
+        
+         
+
+</div>  
+
+</section>
+
+<br>
+<br>
+{%endblock content %}

@@ -1,0 +1,91 @@
+{% extends 'custom_admin/base.html'%}
+
+{% block title %}
+order
+{% endblock title%}
+
+{%block pagehead%}
+ORDER
+{%endblock pagehead%}
+
+{% block content%}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Order</h3>
+              
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>user name</th>
+                  <th>payment method</th>
+                  <th>transaction_id</th>
+                  <th>Created Date</th>
+                  
+                  <th>total</th>
+           
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in res%}
+                <tr>
+
+                  <td>{{x.id}} </td>
+                  <td> {{x.user}}</td>
+                  <td> {{x.payment_gateway_id }}</td>
+                  <td>{{x.transaction_id }}</td>
+                  <td>{{x.created_date}}</td>
+                  
+                  <td>{{x.set_grand_total }}</td>
+                  
+                  
+                  
+                  <td><a href="{% url 'custom-admin:vieworder' x.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a>  
+                </tr>
+                {%endfor%}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>id</th>
+                  <th>user name</th>
+                  <th>payment method</th>
+                  <th>transaction_id</th>
+                  <th>Created Date</th>
+                  <th>grand total</th>
+           
+                  <th>Action</th>
+                  
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+         
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  
+
+
+{% endblock content %}
+

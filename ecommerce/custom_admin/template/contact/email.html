@@ -1,0 +1,69 @@
+{% extends 'custom_admin/base.html'%}
+
+{% block title %}
+Email
+{% endblock title%}
+
+{%block pagehead%}
+Email
+{%endblock pagehead%}
+
+{% block content%}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Email template</h3>
+              <button type="button" class="btn btn-success" style="float:right;"><a href="{% url 'custom-admin:add-email' %}"><h3 class="card-title" style="color : white">Add Email</h3></a></button>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>title</th>
+                  <th>subject</th>
+                  <th>Action</th>
+                 
+                  
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in res%}
+                <tr>
+
+                  <td>{{x.id}} </td>
+                  <td> {{x.title}}</td>
+                  <td> {{x.subject}}</td>
+                  <td><a href="{% url 'custom-admin:edit-email' x.id %}"><i class="fas fa-edit"></i></a><a href="{% url 'custom-admin:delete-email' x.id %}"><i class="fas fa-trash-alt" style="margin-left:20px"></i></a> </td>
+                
+                
+                </tr>
+                {%endfor%}
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>id</th>
+                  <th>title</th>
+                  <th>subject</th>
+                  <th>Action</th>
+                  
+                
+                  
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+          
+  </section>
+  
+  
+{% endblock content %}
+

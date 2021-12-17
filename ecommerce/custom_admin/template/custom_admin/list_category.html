@@ -1,0 +1,87 @@
+{% extends 'custom_admin/base.html'%}
+
+{% block title %}
+Category
+{% endblock title%}
+
+{%block pagehead%}
+CATEGORY
+{%endblock pagehead%}
+
+{% block content%}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Category</h3>
+              <button type="button" class="btn btn-success" style="float:right;"><a href="{% url 'custom-admin:addcategory' %}"><h3 class="card-title" style="color : white">Add Category</h3></a></button>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>name</th>
+                  <th>parent_id</th>
+                  <th>created_by</th>
+                  <th>created_date</th>
+                  
+                  <th>modify_by</th>
+                  <th>modify_date</th>
+                  <th>status</th>
+                  
+                  
+                 
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in res%}
+                <tr>
+
+                  <td>{{x.id}} </td>
+                  <td> {{x.name}}</td>
+                  <td> {{x.parent_id}}</td>
+                  <td>{{request.user}}</td>
+                  <td>{{x.created_date}}</td>
+                  <td>{{request.user}}</td>
+                  <td>{{x.modify_date}}</td>
+                  <td>{{x.status}}</td>
+                  
+                  <td><a href="{% url 'custom-admin:editcategory' x.id %}"><i class="fas fa-edit"></i></a><a href="{% url 'custom-admin:deletecategory' x.id %}"><i class="fas fa-trash-alt" style="margin-left:20px"></i></a> </td>  
+                </tr>
+                {%endfor%}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>id</th>
+                  <th>name</th>
+                  <th>parent_id</th>
+                 <th>created_by</th>
+                  <th>created_date</th>
+                  
+                  <th>modufy_by</th>
+                  <th>modify_date</th>
+                  <th>status</th>
+                  
+                  
+                 
+                  <th>Action</th>
+                  
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+          
+  </section>
+  
+  
+{% endblock content %}
+

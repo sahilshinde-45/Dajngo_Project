@@ -1,0 +1,113 @@
+{%extends 'Eshopper/base.html' %}
+{%block title%}
+Track Order
+{%endblock title %}
+
+{%block content %}
+
+<div class="container">
+<form action="" method="post">
+    {%csrf_token%}
+    <div class="form-group">
+      <label for="formGroupExampleInput">Order ID:-</label>
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" name="past-order-number">
+    </div>
+    <!-- <div class="form-group">
+      <label for="formGroupExampleInput2">Email</label>
+      <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+    </div> -->
+    <div class="form-group">
+        <input type="submit" value="check">
+        
+    </div>
+</form>
+
+  
+<hr>
+{%for x in list_order%}
+    {%if forloop.counter < y%}
+<table>
+    <tr>
+       <td> These are you're order id's :-  {{x.id}}</td>
+      
+    </tr>
+</table>
+    {%endif%}
+{%endfor%}
+
+
+<hr>
+<div class="table-responsive cart_info">
+    <table class="table table-condensed">
+        <thead>
+           
+            {%if fetch_order.transaction_id or fetch_order.payment_gateway_id%}
+              
+        </thead>
+        <tbody>
+           
+            <tr>
+              
+                <td class="cart_transaction_id">
+                  <p> {{fetch_order.transaction_id }} </p>
+
+               </td>
+                 
+               {%for x in fetch_order.orderitem_set.all %}
+                 
+
+                <td class="cart_product">
+                    <a href=""><img src="{{x.product_id.Pro_Image.url}}" style="width: 100px; height:100px" alt=""></a>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="cart_description">
+                    <h4><a href=""> {{x.product_id}}</a></h4>
+                    <p>Web ID: 1089772</p>
+                </td>
+                <td></td>
+
+                <td class="cart_quantity">
+                    <div class="cart_quantity_button">
+                        
+                        <input class="cart_quantity_input" type="text" name="quantity" value="{{x.quantity}}" autocomplete="off" size="2">
+                        
+                    </div>
+                </td>
+                
+                {%endfor%}
+                
+                <br>
+                <td class="cart_total">
+                    <p class="cart_total_price">{{fetch_order.set_grand_total}}</p>
+                </td>
+               
+                {%else%}
+                   
+               
+
+                    {%if messages %}
+                        {%for message in messages%}
+                            <p style="color: red;">{{message}}</p>
+                        {%endfor%}
+
+                    {%endif%}
+                
+                {%endif%}
+            </tr>
+         
+              
+           
+        </tbody>
+    </table>
+    <hr>
+</div>
+
+</div>
+
+<br>
+<br>
+<br>
+{%endblock content%}

@@ -1,0 +1,148 @@
+
+
+
+<table cellspacing="0" style="border-collapse:collapse; width:100%">
+	<tbody>
+		<tr>
+			<td style="background-color:#e1f0f8; border-bottom:none; border-left:none; border-right:1px dashed #c3ced4; border-top:none; width:58%">
+			<h1>THANK YOU FOR YOUR ORDER FROM My Shopping cart.</h1>
+
+			<p>Once your package ships we will send an email with a link to track your order. Your order summary is below. Thank you again for your business.</p>
+			</td>
+			<td style="background-color:#e1f0f8; border-bottom:none; border-left:none; border-right:none; border-top:none; width:42%">
+			<p><strong>Call Us:</strong>&nbsp;<a href=""><span style="color:#0000ff"><u><span style="color:#3696c2">+91 - 22 - </span></u></span><span style="color:#3696c2"><u>40500699</u></span></a><br />
+			<strong>Email:</strong>&nbsp;<span style="color:#333333">info@shoppingcompany.com</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table cellspacing="0" style="border-collapse:collapse; width:590px">
+	<tbody>
+		<tr>
+			<td style="border-bottom:none; border-left:none; border-right:none; border-top:none; vertical-align:top; width:580px">
+			<h3><span style="color:#333333"><strong>Your order</strong></span><span style="color:#333333"><strong># {{order.id}}</strong></span><span style="color:#333333"><strong>#</strong></span></h3>
+
+			<p><span style="color:#333333">Placed on DATE</span> {{order.created_date}}</p>
+
+			<table cellspacing="0" style="border-collapse:collapse; width:100%">
+				<tbody>
+                   
+					<tr>
+						<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:20%">
+						<p><span style="color:#333333">Sr No</span></p>
+						</td>
+						<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:20%">
+						<p><span style="color:#333333">Product</span></p>
+						</td>
+						<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:20%">
+						<p><span style="color:#333333">Quantity</span></p>
+						</td>
+						<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:20%">
+						<p><span style="color:#333333">Unit Price</span></p>
+						</td>
+						<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:20%">
+						<p><span style="color:#333333">Total</span></p>
+						</td>
+					</tr>
+					<tr>
+                        {%for product in order.orderitem_set.all %}
+						<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:20%">
+						<p>{{forloop.counter}}</p>
+						</td>
+						<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:20%">
+						<p>{{product.product_id}}</p>
+						</td>
+						<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:20%">
+						<p>{{product.quantity}}</p>
+						</td>
+						<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:20%">
+						<p>{{ product.product_id.price}}</p>
+						</td>
+						<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:20%">
+						<p>{{product.sub_total}}</p>
+						</td>
+					</tr>
+                    {%endfor%}
+				</tbody>
+			</table>
+
+			<p><br />
+			</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-bottom:none; border-left:none; border-right:none; border-top:none; vertical-align:top; width:580px">
+			<p>Total:</p>{{total}}
+
+			<table cellspacing="0" style="border-collapse:collapse; width:590px">
+				<tbody>
+					<tr>
+						<td style="border-bottom:none; border-left:none; border-right:none; border-top:none; vertical-align:top; width:570px">
+						<h6></h6>
+
+						<h6>BILL TO:</h6> {{order.user.fullname}}
+
+						<p><br />
+						&nbsp;</p>
+
+						<table cellspacing="0" style="border-collapse:collapse; width:100%">
+							<tbody>
+								<tr>
+									<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:50%">
+									<p>User Address</p>
+									</td>
+									<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:50%">
+									<p>Same as Billing Address</p>
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:50%">
+									<p>Billing Address</p>
+									</td>
+									<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:50%">
+									<p>{{order.billing_address_1}}  <br>
+                                        {{ order.billing_city }}, {{ order.billing_state }}<br>
+                                        {{ order.billing_zipcode }}<br>
+                                        {{ order.billing_country  }}<br></p>
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:50%">
+									<p>Shipping Address</p>
+									</td>
+									<td style="border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:1px solid #000000; border-top:1px solid #000000; width:50%">
+									<p>  {{ order.shipping_address_1 }}<br>
+                                        {{ order.shipping_city }}, {{ order.shipping_state }}<br>
+                                        {{ order.shipping_zipcode }}<br>
+                                        {{ order.shipping_contry }}<br></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<p></p>
+						</td>
+					</tr>
+					<tr>
+						<td style="border-bottom:none; border-left:none; border-right:none; border-top:none; vertical-align:top; width:570px">
+						<h6>PAYMENT METHOD:</h6> {{order.payment_gateway_id.name}}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<p><br />
+			&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-bottom:none; border-left:none; border-right:none; border-top:none; vertical-align:top; width:580px">
+			<p><br />
+			</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>

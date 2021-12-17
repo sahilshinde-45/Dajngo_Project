@@ -1,0 +1,102 @@
+{% extends 'Eshopper/base.html' %}	
+{% load static %}
+{% load socialaccount %}
+
+{% block content %}
+<style>
+ul,li{
+	display: inline;
+	margin-right: 15px;
+
+}
+</style>
+	<section id="form"><!--form-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-1">
+					<div class="login-form"><!--login form-->
+						{%if user.is_authenticated %}
+						Welcome :- {{request.user}}
+						{%endif%}
+						<h2>Login to your account</h2>
+						{% if login_message_error %}
+							<p style="color: red;">	{{ login_message_error}}  </p>
+							{%endif%}
+						<form action="#" method="post">
+							{% csrf_token %}
+							
+							<input type="text"  id= 'username' name ='username' placeholder="Name*" required />
+							<input type="password" id="password" name ='password' placeholder="password*" required />
+							
+							
+							<span>
+								<input type="checkbox" class="checkbox"> 
+								Keep me signed in
+							</span>
+							<button type="submit" class="btn btn-default" name="loginbtn">Login</button>
+							
+							
+							
+						</form>
+
+						<div class="forget-passowrd" style="text-align: right;">
+						  <a href="{% url 'password_reset' %}">Forget Password</a>
+					   </div>
+						<br>
+
+						{%if user.is_authenticated %}
+						
+						{%else%}
+						<ul style="list-style-type:none;">
+							<li style="margin-left: -45px;"><a href="{% provider_login_url 'google' %}" class="btn btn-default">Google Login</a></li>
+							
+							<li><a href="{% provider_login_url 'facebook' %}" class="btn btn-default">Facebook Login </a></li>
+					
+
+							<li ><a href="{% provider_login_url 'twitter' %}" class="btn btn-default" style="margin-top:10px; margin-left:-5px">Twitter Login </a></li>
+						
+						</ul>
+						{%endif%}
+						
+					</div><!--/login form-->
+				</div>
+				<div class="col-sm-1">
+					<h2 class="or">OR</h2>
+				</div>
+				<div class="col-sm-4">
+					{% for message in messages %}
+							<p style="color: blue;">{{message}}</p>
+						{%endfor%}
+					<div class="signup-form"><!--sign up form-->
+						<h2>New User Signup!</h2>
+					
+					{% if form.non_field_errors %}
+					{% for error in form.non_field_errors %}
+						<p class="alert alert-danger">
+							{{ error }}
+						</p>
+					{% endfor %}
+					{% endif %}
+						<form action="#" method="post">
+							
+							{%csrf_token%}
+							
+							{%for fm in form%}
+							  {{fm}} 
+							
+							{%endfor%}
+
+						
+
+							
+							<button type="submit" class="btn btn-default" name="signupbtn">Signup</button>
+						</form>
+						<br>
+						
+					</div><!--/sign up form-->
+				</div>
+			</div>
+		</div>
+	</section><!--/form-->
+{% endblock content %}
+	

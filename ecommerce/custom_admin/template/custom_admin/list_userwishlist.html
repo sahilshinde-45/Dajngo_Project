@@ -1,0 +1,65 @@
+{% extends 'custom_admin/base.html'%}
+
+{% block title %}
+userwishlist
+{% endblock title%}
+
+{%block pagehead%}
+User_WISH_LIST
+{%endblock pagehead%}
+
+{% block content%}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">userwishlist</h3>
+              <button type="button" class="btn btn-success" style="float:right;"><a href="{% url 'custom-admin:addproduct' %}"><h3 class="card-title" style="color : white">Add Product</h3></a></button>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>user</th>
+                  <th>product</th>
+              
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in object_list %}  <!--object list in the query which can be used anywhere-->
+                <tr>
+
+                  <td>{{x.id}} </td>
+                  <td> {{x.user}}</td>
+                  <td> {{x.product}}</td>
+                 
+                  <td><a href="{% url 'custom-admin:editproduct' x.id %}"><i class="fas fa-edit"></i></a><a href="{% url 'custom-admin:deleteproduct' x.id %}"><i class="fas fa-trash-alt" style="margin-left:20px"></i></a></td>  
+                </tr>
+                {%endfor%}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>id</th>
+                    <th>user</th>
+                    <th>product</th>
+                
+                    <th>Action</th>
+                  
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+          
+  
+  
+{% endblock content %}
+

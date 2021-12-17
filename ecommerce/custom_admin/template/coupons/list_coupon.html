@@ -1,0 +1,97 @@
+{% extends 'custom_admin/base.html'%}
+
+{% block title %}
+Coupon
+{% endblock title%}
+
+{%block pagehead%}
+COUPON
+{%endblock pagehead%}
+
+{% block content%}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Coupon</h3>
+              <button type="button" class="btn btn-success" style="float:right;"><a href="{% url 'custom-admin:addcoupon' %}"><h3 class="card-title" style="color : white">Add Coupon</h3></a></button>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>code</th>
+                  <th>percent_off</th>
+                  <th>Number of use</th>
+                  <th>created_by</th>
+                  <th>created_date</th>
+                  
+                  <th>modify_by</th>
+                  <th>modify_date</th>
+                  
+                  
+                  
+                 
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in res%}
+                <tr>
+
+                  <td>{{x.id}} </td>
+                  <td> {{x.code}}</td>
+                  <td> {{x.percent_off}}</td>
+                  <td>{{x.no_of_uses}}</td>
+                  <td>{{request.user}}</td>
+                  <td>{{x.created_date}}</td>
+                  <td>{{request.user}}</td>
+                  <td>{{x.modify_date}}</td>
+                  
+                  
+                  <td><a href="{% url 'custom-admin:editcoupon' x.id %}"><i class="fas fa-edit"></i></a><a href="{% url 'custom-admin:deletecoupon' x.id %}"><i class="fas fa-trash-alt" style="margin-left:20px"></i></a> </td>  
+                </tr>
+                {%endfor%}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>id</th>
+                    <th>code</th>
+                    <th>percent_off</th>
+                    <th>Number of use</th>
+                    <th>created_by</th>
+                    <th>created_date</th>
+                    
+                    <th>modify_by</th>
+                    <th>modify_date</th>
+                    <th>Action</th>
+                  
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+         
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  
+  
+{% endblock content %}
+

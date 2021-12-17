@@ -1,0 +1,235 @@
+{%extends 'Eshopper/base.html' %}
+
+{%block title%}Eshopper | Payemnt {% endblock title %}
+
+{%block content %}
+<style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+   
+
+
+    
+#cart,#summary {
+        max-width: 500px
+    }
+    
+.h6 {
+        font-size: 1.2rem;
+        font-weight: 700
+    }
+    
+.h6 a {
+        text-decoration: none;
+        font-size: 1rem
+    }
+    
+.item img {
+        object-fit: cover;
+        border-radius: 5px
+    }
+    
+.item {
+        position: relative
+    }
+    
+.number {
+        position: absolute;
+        font-weight: 800;
+        color: #fff;
+        background-color: #0033ff;
+        padding-left: 7px;
+        border-radius: 50%;
+        border: 1px solid #fff;
+        width: 25px;
+        height: 25px;
+        top: -5px;
+        right: -5px
+    }
+    
+.display-5 {
+        font-size: 1.2rem
+    }
+    
+#cart~p.text-muted {
+        margin: 0;
+        font-size: 0.9rem
+    }
+    
+tr.text-muted td {
+        border: none
+    }
+    
+.fa-minus,.fa-plus {
+        font-size: 0.7rem
+    }
+    
+.table td {
+        padding: 0.3rem
+    }
+    
+.btn.text-uppercase {
+        border: 1px solid #333;
+        font-weight: 600;
+        border-radius: 0px
+    }
+    
+.btn.text-uppercase:hover {
+        background-color: #333;
+        color: #eee
+    }
+    
+.btn.text-white {
+        background-color: #66cdaa;
+        border-radius: 0px
+    }
+    
+.btn.text-white:hover {
+        background-color: #3cb371
+    }
+    
+.wrapper .row+div.text-muted {
+        font-size: 0.9rem
+    }
+    
+.mobile,#mobile {
+        display: none
+    }
+    
+.buttons {
+        vertical-align: text-bottom
+    }
+    
+#register {
+        width: 50%
+    }
+    
+   
+</style>
+
+<div class="wrapper">
+    <div class="h5 large" ></div>
+    <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1">
+
+            
+            <h2 class="title text-center">Payment Method</h2>
+            {%if cartitems%}
+           
+            <div id="details" class="bg-white rounded pb-5" style="width: 50%;margin-left:230px">
+                <!--PayPAL-->
+                <div id="make-payment-button">
+                    <div id="paypal-button-container" ></div>
+                </div>   
+                <h2 class="title text-center">OR</h2>
+                <div id="make-payment-button" style="text-align: center;">
+                    <button id="id_make-payment" name="cod" class="btn btn-ligt" style="width: 50%;"> COD </button>
+                </div> 
+            </div> 
+            {%else%}
+               <div style="text-align:center">
+               NO ITEMS IN CART 
+                  </div>
+            {%endif%}
+            
+            
+        </div>
+        <table>
+            <tbody>
+        <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1 pt-lg-0 pt-3">
+            <div id="cart" class="bg-white rounded">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="h2">Cart Summary</div>
+                    
+                </div>
+                <br>
+                <div class="d-flex jusitfy-content-between align-items-center pt-3 pb-2 border-bottom">
+                    {%for item in items %}
+                    <tr>
+                        <td>
+                    <div class="item pr-2" style="margin-left: -100px;"> 
+                        <img src="{{item.product_id.Pro_Image.url}}" alt="" width="80" height="80">
+                        
+                    </div>
+                </td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                       <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>
+                    <div class="d-flex flex-column px-3"> <b class="h5">{{item.product_id.name}}</b> 
+                        <br>
+                        <a href="#" class="h5 text-primary">{{item.quantity}}</a> </div>
+                </td>
+                       <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                       <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>
+                    <div class="ml-auto"> <b class="h5"></b>{{item.sub_total}} </div>
+                </td>
+                </tr>
+                </div>
+
+                {%endfor%}
+            
+     
+     
+     
+           
+           
+			
+            <tr>      
+                <td colspan="4">&nbsp;</td>
+			         
+               
+
+                <div class="d-flex align-items-center py-2" >
+                    <tr>
+                        <td> <div class="display-5"  style="margin-left: 50px;">Total</div> </td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  
+                       
+                    <td><div class="font-weight-bold" style="float: right;">{{order.set_grand_total}}</div></td>
+                </tr>
+                    
+                </div>
+              </div>
+              
+            
+            </tr>
+        </tbody>
+        </table>
+            </div>
+        
+            
+               
+
+            <div class="row pt-lg-3 pt-2 buttons mb-sm-0 mb-2">
+               <!--keep some info here -->
+               
+            </div>
+            
+        </div>
+    </div>
+   
+</div>
+
+<br>
+<br>
+
+
+{%endblock content%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
