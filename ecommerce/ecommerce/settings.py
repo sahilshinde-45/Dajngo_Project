@@ -234,8 +234,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'raulshivani06@gmail.com'
-EMAIL_HOST_PASSWORD ='9821019851'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD =''
 
 MAILCHIMP_API_KEY = "ef3c4d7985ec4ac2c5f193d002b667ae-us20"
 MAILCHIMP_DATA_CENTER = "us20"
